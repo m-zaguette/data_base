@@ -1,0 +1,12 @@
+CREATE TABLE Cliente(codcliente INT PRIMARY KEY,
+nome VARCHAR(150),
+email VARCHAR(100),
+CPF VARCHAR(20)
+);
+
+
+ALTER TABLE Cliente ADD endereco VARCHAR(250);
+
+ALTER TABLE Cliente ALTER COLUMN endereco VARCHAR(150);
+
+ALTER TABLE Cliente DROP COLUMN endereco;

@@ -1,0 +1,33 @@
+CREATE TABLE Cliente(
+CodCliente INT, 
+Nome VARCHAR(50) NOT NULL,
+Endereco VARCHAR(100),
+Cidade VARCHAR(50),
+Cep VARCHAR(10),
+UF CHAR(2)
+);
+/**/
+ALTER TABLE Cliente ALTER COLUMN CodCliente INT NOT NULL
+/**/
+ALTER TABLE Cliente ADD CONSTRAINT PK_Cliente_CodCliente Primary Key (CodCliente)
+/**/
+
+CREATE TABLE Vendedor(
+CodVendedor INT NOT NULL IDENTITY,
+Nome VARCHAR(50),
+FaixaComissao NUMERIC(18,0),
+SalarioFixo NUMERIC(18,0)
+);
+/**/
+ALTER TABLE Vendedor ADD CONSTRAINT PK_Vendedor_CodVendedor Primary Key (CodVendedor)
+/**/
+
+CREATE TABLE Produto(
+CodProduto INT NOT NULL IDENTITY,
+Descricao VARCHAR(200),
+Unidade char(2),
+ValorUnitario NUMERIC(18,2),
+); 
+/**/
+ALTER TABLE Produto ADD CONSTRAINT PK_Produto_CodProduto Primary Key (CodProduto)
+/**/

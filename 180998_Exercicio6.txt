@@ -1,0 +1,49 @@
+
+/* 1 - Listar o código e o nome dos vendedores que efetuaram vendas para o cliente com código 10 */
+	SELECT Vendedor.CodVendedor, Vendedor.Nome
+	FROM Pedido INNER JOIN Vendedor
+	ON Pedido.CodCliente = 10;
+
+/* 2 - Listar o número do pedido, prazo de entrega, a quantidade e a descrição do produto com código 100.*/
+	SELECT Pedido.NumPedido, Pedido.PrazoEntrega, ItemPedido.Quantidade, Produto.Descricao
+	FROM ItemPedido 
+	INNER JOIN Produto ON ItemPedido.CodProduto = Produto.CodProduto
+	INNER JOIN Pedido ON ItemPedido.NumPedido = Pedido.NumPedido
+	WHERE Produto.CodProduto = 100;
+
+/* 3 - Quais os vendedores (codigo e nome) fizeram pedidos para o Cliente 'José da Silva'. */
+	SELECT Vendedor.CodVendedor,Vendedor.Nome
+	FROM Pedido
+	INNER JOIN Vendedor ON Pedido.CodVendedor = Vendedor.CodVendedor
+	INNER JOIN Cliente ON Pedido.CodCliente = Cliente.CodCliente
+	WHERE Cliente.Nome = 'José da Silva';
+
+/* 4 - Listar o número de pedido, o código do produto, a descrição do produto, o código do vendedor, o nome do vendedor e o nome do cliente para todos os clientes que moram em Sorocaba. */
+	SELECT Pedido.NumPedido, Produto.CodProduto, Produto.Descricao, Vendedor.CodVendedor, Vendedor.Nome, Cliente.Nome
+	FROM ItemPedido
+	INNER JOIN Pedido ON ItemPedido.NumPedido = Pedido.NumPedido
+	INNER JOIN Produto ON ItemPedido.CodProduto = Produto.CodProduto
+	INNER JOIN Vendedor ON Pedido.CodVendedor = Vendedor.CodVendedor
+	INNER JOIN Cliente ON Pedido.CodCliente = Cliente.CodCliente
+	WHERE Cliente.Cidade = 'Sorocaba';
+
+/* 5 - Listar o código do produto, a descrição, a quantidade pedida e o prazo de entrega para o pedido número 123. */
+	SELECT Produto.CodProduto, Produto.Descricao, ItemPedido.Quantidade, Pedido.PrazoEntrega
+	FROM ItemPedido
+	INNER JOIN Produto ON ItemPedido.CodProduto = Produto.CodProduto
+	INNER JOIN Pedido ON ItemPedido.NumPedido = Pedido.NumPedido
+	WHERE Pedido.NumPedido = 123;
+
+/* 6 - Quais os clientes (nome e endereço) da cidade de Itu ou Sorocaba tiveram seus pedidos tirados com o vendedor de código igual a 10. */
+	SELECT Cliente.Nome, Cliente.Endereco
+	FROM Pedido
+	INNER JOIN Cliente ON Pedido.CodCliente = Cliente.CodCliente
+	INNER JOIN Vendedor ON Pedido.CodVendedor = Vendedor.CodVendedor
+	WHERE (Cliente.Cidade = 'Sorocaba' OR Cliente.Cidade = 'Itu') AND Vendedor.CodVendedor = 10;
+
+/* 7 - Listar o código do cliente, nome do cliente e o total de pedidos que cada um realizou. */
+	SELECT Cliente.CodCliente, Cliente.Nome, 'Quantidade de pedidos' = COUNT(*)
+	FROM Pedido
+	INNER JOIN Cliente ON Pedido.CodCliente = Cliente.CodCliente
+	GROUP BY Cliente.Nome, Cliente.CodCliente;
+

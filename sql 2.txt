@@ -1,0 +1,44 @@
+CREATE TABLE tb_medico(
+Cod_Medico INT PRIMARY KEY,
+Nome_Medico VARCHAR(40) NOT NULL
+);
+
+Create table tb_paciente
+(  Codpaciente    int   Primary  Key,
+   Nompaciente    varchar(30)   not null,
+   Datanasc       datetime,
+   Sexo           char( 1 ) check (sexo in ( 'F',  'M' )),
+   Endereco       varchar(25) ) ;
+
+
+Create table  tb_consulta
+(  Codconsulta       int     Primary Key ,
+    Dataconsulta     datetime,
+    Tipocons      char(01)   check  (tipocons in ('P','C')),
+    Codpaciente   int    Not Null   References tb_paciente,                   
+    Codmedico     int    Not Null   References tb_medico ,
+    Valconsulta  decimal(5,2)    Not Null ) ;
+
+	
+ALTER TABLE  tb_paciente ADD cidpaciente varchar( 15 ) ;
+
+ALTER TABLE  tb_paciente  ADD desconto char( 1 ) check  (desconto in ('S','N' ) );
+ 
+ALTER TABLE  tb_paciente ADD  Check  (sexo in ('F', 'M' ) );
+
+ALTER TABLE  tb_paciente alter column cidpaciente varchar(30);
+
+ALTER TABLE tb_paciente ADD valorconsulta decimal(6,2);
+
+ALTER TABLE tb_paciente ADD email VARCHAR(60);
+
+ALTER TABLE tb_paciente DROP COLUMN email;
+
+
+INSERT INTO tb_paciente values(1,'Maria Marta', '02/12/1995', 'F', 'Rua Fernando Dias',	'Sorocaba', 'S', 1000.00);
+SELECT * FROM tb_paciente where Nompaciente LIKE '%o%';
+
+INSERT INTO tb_paciente values(2,'José Francisco', '12/12/1995', 'F', 'AV Flores da Primavera',	'Sorocaba', 'S', 400.00);
+INSERT INTO tb_paciente values(3,'Alex', '01/10/1995', 'M', 'Rua sem nome',	'São Paulo', 'S', 3100.00);
+INSERT INTO tb_paciente values(4,'Zezinho', '12/12/1991', 'M', 'AV Flores da Primavera',	'Sorocaba', 'S', 400.00);
+INSERT INTO tb_paciente values(5,'Alex', '01/10/1995', 'M', 'Rua Seila','São Paulo', 'S', 3100.00);
